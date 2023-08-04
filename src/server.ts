@@ -34,6 +34,23 @@ app.get("/echo/:exampleRouteParameter", (req, res) => {
   });
 });
 
+app.get("/shout/:exampleRouteParameter", (req, res) => {
+  let echoContent = req.params.exampleRouteParameter;
+  echoContent = echoContent.toUpperCase();
+  res.json({
+    shout: echoContent,
+    result: `I am echoing back to you: ${echoContent}`,
+  });
+});
+
+app.get("/eat/:food", (req, res) => {
+  const echoContent = req.params.food;
+  if (echoContent)
+    res.json({
+      message: `Yum-yum you ate a ${echoContent}!`,
+    });
+});
+
 app.get("/multiply/:numOne/:numTwo", (req, res) => {
   /**
    * Note that `numOne` and `numTwo` are both typed as string.
@@ -47,6 +64,15 @@ app.get("/multiply/:numOne/:numTwo", (req, res) => {
   res.json({
     original: `${numOne} x ${numTwo}`,
     result: multiplication,
+  });
+});
+
+app.get("/sum/:numOne/:numTwo", (req, res) => {
+  const { numOne, numTwo } = req.params;
+  const sum = parseInt(numOne) + parseInt(numTwo);
+  res.json({
+    original: `${numOne} + ${numTwo}`,
+    result: sum,
   });
 });
 
